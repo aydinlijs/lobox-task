@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import { DropdownOption } from './components/Dropdown'
+import { Dropdown } from './components/Dropdown/Dropdown'
+import { useKeyCode } from './hooks/useEnterClick'
+import { getMoreWordOptions } from './utils/optionsManager'
 
-function App() {
+const App = () => {
+  const [options, setOptions] = useState<DropdownOption[]>(
+    getMoreWordOptions(0)
+  )
+
+  useKeyCode('Enter', () => {
+    setOptions((prev: DropdownOption[]) => [
+      ...prev,
+      ...getMoreWordOptions(prev.length),
+    ])
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Dropdown options={options} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
