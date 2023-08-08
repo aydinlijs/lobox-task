@@ -248,11 +248,10 @@ const randomWords = [
   'pepperjack cheese',
 ]
 
-const getMoreWords = (currentCount: number): string[] =>
-  randomWords.slice(currentCount, currentCount + 4)
+const getRandomWords = (count: number): string[] => randomWords.slice(0, count)
 
-export const getMoreWordOptions = (currentCount: number) => {
-  return getMoreWords(currentCount).map((word) => ({
+export const getRandomWordOptions = (count: number) => {
+  return getRandomWords(count).map((word) => ({
     label: word.charAt(0).toUpperCase() + word.slice(1),
     value: word.split(' ').join('_').toLowerCase(),
   }))

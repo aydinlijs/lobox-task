@@ -1,24 +1,13 @@
-import { useState } from 'react'
 import { DropdownOption } from './components/Dropdown'
 import { Dropdown } from './components/Dropdown/Dropdown'
-import { useKeyCode } from './hooks/useEnterClick'
-import { getMoreWordOptions } from './utils/optionsManager'
+import { getRandomWordOptions } from './utils/optionsManager'
+
+const options: DropdownOption[] = getRandomWordOptions(50)
 
 const App = () => {
-  const [options, setOptions] = useState<DropdownOption[]>(
-    getMoreWordOptions(0)
-  )
-
-  useKeyCode('Enter', () => {
-    setOptions((prev: DropdownOption[]) => [
-      ...prev,
-      ...getMoreWordOptions(prev.length),
-    ])
-  })
-
   return (
     <div className="App">
-      <Dropdown options={options} />
+      <Dropdown options={options} onChange={(option) => {}} />
     </div>
   )
 }
